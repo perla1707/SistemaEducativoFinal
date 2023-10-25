@@ -1,0 +1,178 @@
+﻿@model MVCCRUD.Models.Registro
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Registro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label class="control-label">CURP</label>
+                <input asp-for="Curp" class="form-control" maxlength="18" />
+                <span asp-validation-for="Curp" class="text-danger"></span>
+            </div>
+
+            <script>
+                document.querySelector('form').addEventListener('submit', function (event) {
+                    var curpInput = document.querySelector('input[name="Curp"]');
+                    var curpValue = curpInput.value;
+
+                    if (curpValue.length !== 18) {
+                        alert('El CURP debe contener exactamente 18 caracteres.');
+                        event.preventDefault(); // Evitar que el formulario se envíe
+                    }
+                });
+            </script>
+            <div class="form-group">
+                <label class="control-label">Nombre completo de quien realizá el trámite</label>
+                <input asp-for="NombreTramite" class="form-control" />
+                <span asp-validation-for="NombreTramite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paterno" class="control-label"></label>
+                <input asp-for="Paterno" class="form-control" />
+                <span asp-validation-for="Paterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Materno" class="control-label"></label>
+                <input asp-for="Materno" class="form-control" />
+                <span asp-validation-for="Materno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" maxlength="10" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <script>
+                document.querySelector('form').addEventListener('submit', function (event) {
+                    var telefonoInput = document.querySelector('input[name="Telefono"]');
+                    var telefonoValue = telefonoInput.value;
+
+                    if (telefonoValue.length > 10) {
+                        alert('El número de teléfono no debe tener más de 10 dígitos.');
+                        event.preventDefault(); // Evitar que el formulario se envíe
+                    }
+                });
+            </script>
+            <div class="form-group">
+                <label asp-for="Celular" class="control-label"></label>
+                <input asp-for="Celular" class="form-control" maxlength="10" />
+                <span asp-validation-for="Celular" class="text-danger"></span>
+            </div>
+
+            <script>
+                document.querySelector('form').addEventListener('submit', function (event) {
+                    var celularInput = document.querySelector('input[name="Celular"]');
+                    var celularValue = celularInput.value;
+
+                    if (celularValue.length > 10) {
+                        alert('El número de celular no debe tener más de 10 dígitos.');
+                        event.preventDefault(); // Evitar que el formulario se envíe
+                    }
+                });
+            </script>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">¿Nivel al que desea ingresar o que ya cursa el alumno?</label>
+                <select asp-for="Nivel" class="form-control">
+                    <option value="Primero">Primero</option>
+                    <option value="Segundo">Segundo</option>
+                    <option value="Tercero">Tercero</option>
+                    <option value="Cuarto">Cuarto</option>
+                    <option value="Quinto">Quinto</option>
+                </select>
+                <span asp-validation-for="Nivel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Municipio donde desea estudie el alumno</label>
+                <select asp-for="Municipio" class="form-control">
+                    <option value="Abasolo">Abasolo</option>
+                    <option value="Acuña">Acuña</option>
+                    <option value="Allende">Allende</option>
+                    <option value="Arteaga">Arteaga</option>
+                    <option value="Candela">Candela</option>
+                    <option value="Castaños">Castaños</option>
+                    <option value="Cuatro Ciénegas">Cuatro Ciénegas</option>
+                    <option value="Escobedo">Escobedo</option>
+                    <option value="Francisco I. Madero">Francisco I. Madero</option>
+                    <option value="Frontera">Frontera</option>
+                    <option value="General Cepeda">General Cepeda</option>
+                    <option value="Guerrero">Guerrero</option>
+                    <option value="Hidalgo">Hidalgo</option>
+                    <option value="Jiménez">Jiménez</option>
+                    <option value="Juárez">Juárez</option>
+                    <option value="Lamadrid">Lamadrid</option>
+                    <option value="Matamoros">Matamoros</option>
+                    <option value="Monclova">Monclova</option>
+                    <option value="Morelos">Morelos</option>
+                    <option value="Múzquiz">Múzquiz</option>
+                    <option value="Nadadores">Nadadores</option>
+                    <option value="Nava">Nava</option>
+                    <option value="Ocampo">Ocampo</option>
+                    <option value="Parras">Parras</option>
+                    <option value="Piedras Negras">Piedras Negras</option>
+                    <option value="Progreso">Progreso</option>
+                    <option value="Ramos Arizpe">Ramos Arizpe</option>
+                    <option value="Sabinas">Sabinas</option>
+                    <option value="Sacramento">Sacramento</option>
+                    <option value="San Buenaventura">San Buenaventura</option>
+                    <option value="San Juan de Sabinas">San Juan de Sabinas</option>
+                    <option value="Torreón">Torreón</option>
+                    <option value="Viesca">Viesca</option>
+                    <option value="Villa Unión">Villa Unión</option>
+                    <option value="Zaragoza">Zaragoza</option>
+                    <option value="Matamoros">Matamoros</option>
+                    <option value="Saltillo">Saltillo</option>
+                    <option value="General Zertuche">General Zertuche</option>
+
+                </select>
+                <span asp-validation-for="Municipio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el asunto que va a tratar</label>
+                <select asp-for="Asunto" class="form-control">
+                    <option value="Inscripcion">Inscripción</option>
+                    <option value="Papeleria">Papelería</option>
+                    <option value="Bajas">Bajas</option>
+                    <option value="Altas">Altas</option>
+                    <option value="Cambio De Turno">Cambio de turno</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <span asp-validation-for="Asunto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

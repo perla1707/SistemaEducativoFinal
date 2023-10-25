@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCCRUD</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVCCRUD.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVCCRUD</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Registro" asp-action="Index" data-authenticate="true">Lista de Registros</a>
+                        </li>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const authenticateLinks = document.querySelectorAll('[data-authenticate="true"]');
+                                authenticateLinks.forEach(link => {
+                                    link.addEventListener('click', function (e) {
+                                        e.preventDefault();
+
+                                        const dialog = document.createElement('div');
+                                        dialog.innerHTML = `
+                                                <div id="auth-dialog" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2;">
+                                                                                <button id="close-auth-dialog" style="position: absolute; top: 10px; right: 10px; cursor: pointer; background: red; color: white;">Cerrar</button>
+                                                    <p>Introduce tus credenciales de Administrador:</p>
+                                                    <input id="username" type="text" placeholder="Usuario" style="width: 100%; margin-bottom: 10px;">
+                                                    <input id="password" type="password" placeholder="Contraseña" style="width: 100%; margin-bottom: 10px;">
+                                                    <button id="authenticate" style="width: 100%;">Autenticar</button>
+                                                </div>
+                                            `;
+                                        document.body.appendChild(dialog);
+
+                                        const closeDialogButton = document.getElementById('close-auth-dialog');
+                                        closeDialogButton.addEventListener('click', function () {
+                                            dialog.remove();
+                                        });
+
+                                        const authenticateButton = document.getElementById('authenticate');
+                                        authenticateButton.addEventListener('click', function () {
+                                            const username = document.getElementById('username').value;
+                                            const password = document.getElementById('password').value;
+
+                                            if (username === 'admin' && password === 'admin') {
+                                                // Redirigir al enlace original si las credenciales son correctas
+                                                window.location.href = link.getAttribute('href');
+                                            } else {
+                                                alert('Credenciales incorrectas. No se permite el acceso.');
+                                            }
+
+                                            // Eliminar el cuadro de diálogo
+                                            dialog.remove();
+                                        });
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Registro" asp-action="Create">Crear Registro</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - MVCCRUD - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
